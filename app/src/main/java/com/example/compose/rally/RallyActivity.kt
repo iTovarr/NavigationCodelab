@@ -99,11 +99,10 @@ fun RallyApp() {
                 }
                 composable(
                     route = SingleAccount.routeWithArgs,
-                    arguments = SingleAccount.arguments
+                    arguments = SingleAccount.arguments,
+                    deepLinks = SingleAccount.deepLinks
                 ) { navBackStackEntry ->
-                    // Extraemos el String de la cuenta de la entrada actual de la pila
                     val accountType = navBackStackEntry.arguments?.getString(SingleAccount.accountTypeArg)
-
                     SingleAccountScreen(accountType)
                 }
             }
