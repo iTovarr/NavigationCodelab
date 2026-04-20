@@ -62,7 +62,7 @@ import java.util.Locale
 fun OverviewScreen(
     onClickSeeAllAccounts: () -> Unit = {},
     onClickSeeAllBills: () -> Unit = {},
-    onAccountClick: (String) -> Unit = {},
+    onAccountClick: (String) -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -72,11 +72,14 @@ fun OverviewScreen(
     ) {
         AlertCard()
         Spacer(Modifier.height(RallyDefaultPadding))
+
         AccountsCard(
             onClickSeeAll = onClickSeeAllAccounts,
             onAccountClick = onAccountClick
         )
+
         Spacer(Modifier.height(RallyDefaultPadding))
+        
         BillsCard(
             onClickSeeAll = onClickSeeAllBills
         )
