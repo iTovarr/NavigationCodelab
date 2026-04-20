@@ -79,7 +79,7 @@ fun OverviewScreen(
         )
 
         Spacer(Modifier.height(RallyDefaultPadding))
-        
+
         BillsCard(
             onClickSeeAll = onClickSeeAllBills
         )
