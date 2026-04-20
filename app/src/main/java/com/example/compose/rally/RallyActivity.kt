@@ -28,6 +28,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -56,10 +58,9 @@ fun RallyApp() {
             topBar = {
                 RallyTabRow(
                     allScreens = rallyTabRowScreens,
-                    // Pass the callback like this,
-                    // defining the navigation action when a tab is selected:
                     onTabSelected = { newScreen ->
-                        navController.navigate(newScreen.route)
+                        navController
+                            .navigateSingleTopTo(newScreen.route)
                     },
                     currentScreen = currentScreen,
                 )
@@ -83,3 +84,14 @@ fun RallyApp() {
         }
     }
 }
+
+fun NavHostController.navigateSingleTopTo(route: String) =
+    this.navigate(route) {
+        popUpTo(
+            this@navigateSingleTopTo.graph.findStartDestination().id
+        ) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
